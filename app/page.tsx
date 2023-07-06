@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Hero, SearchBar, CustomFilter, CarCard } from '@/components'
+import { Hero, SearchBar, CustomFilter, CarCard, ShowMore } from '@/components'
 import { fetchCars } from '@/utils'
 import { fuels, yearsOfProduction } from '@/constants';
 import { SearchParamProps } from '@/types';
@@ -22,7 +22,7 @@ export default async function Home( { searchParams }: SearchParamProps) {
       <div className='mt-12 padding-x padding-y max-width' id="discover">
         <div className='home__text-container'>
           <h1 className='text-4xl font-extrabold'>Car Catalogue</h1>
-          <p>Explore the cars you might like</p>
+          <p>Explore Some Cars!</p>
         </div>
         <div className='home__filters'>
           <SearchBar />
@@ -37,6 +37,10 @@ export default async function Home( { searchParams }: SearchParamProps) {
             <div className='home__cars-wrapper'>
               {allCars?.map((car) => <CarCard car={car} />)}
             </div>
+            <ShowMore 
+              pageNumber={(searchParams.limit || 10) / 10}
+              isNext={(searchParams.limit || 10) > allCars.length}
+            />
           </section>
         ) : (
           <div className="home__error-container">

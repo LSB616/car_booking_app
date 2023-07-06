@@ -60,3 +60,8 @@ export interface SearchParamProps {
     searchParams: SearchProps
 }
 
+export interface ShowMoreProps {
+    pageNumber: number;
+    isNext: boolean;
+}
+
